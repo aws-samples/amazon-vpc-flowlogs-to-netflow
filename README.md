@@ -43,7 +43,11 @@ If you change the format then the code will need to be altered to match.
 
 ## Security
 
-Ensure the IAM roles used by the Lambda function are as restrictive as possible.
+Ensure the IAM roles used by the Lambda function are as restrictive as possible. The Lambda function requires access to read files from a specific S3 bucket and then remove them. 
+
+If you don't want the function to remove the files then comment out line 196
+
+```s3_client.delete_object(Bucket=bucketName, Key=fileName)```
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
