@@ -8,7 +8,7 @@ import gzip
 import tempfile
 
 s3_client = boto3.client("s3")
-netflow_receiver_address = "10.111.111.21"
+netflow_receiver_address = "x.x.x.x" # Change this to the address of your NetFlow Receiver
 netflow_receiver_port = 2055
 
 #------------------------------------------------------------------------------------------------------
