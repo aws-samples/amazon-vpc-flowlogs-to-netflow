@@ -10,6 +10,7 @@ NetFlow packets are broken into two main parts. The first part is the header (*I
 *Image 2*
 ![NetFlow v5 Header](images/v5-record.png "NetFlow v5 Header")
 
+## WARNING
 
 **This code is not production ready. It's an example of what is possible.**
 
@@ -20,6 +21,7 @@ NetFlow packets are broken into two main parts. The first part is the header (*I
 3. Deploy the Lambda code. 
    - Tested using Python 3.10
    - Review the amount of memory allocated to the Lambda function. You may need to increase this depending on how long the function takes to process your flow log files
+     - Example: *I used a function with 128MB memory. It processed a 100Kb gzip compressed flow log containing approximately 6100 entries. The function consumed 78MB ram and took 4.3 seconds to run. Increasing the Lambda memory would speed up the runtime of the function to a point. It's best to test this in your environment to pick a suitable size*
    - Review the timeout setting for the Lambda function and increase if needed
    - Ensure that the Lambda function is deployed into a VPC that can reach your NetFlow v5 receiver. You will also need to configure a [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/security-groups.html) as well as any firewalls/Network ACLs you might have. When doing this make it as restrictive as possible. Just allow the Lambda function to access the NetFlow v5 port on the receiver and nothing else. Typically NetFlow listens on UDP 2055 however your configuration could differ.
    - Ensure that the Lambda function has the right permissions to access the S3 bucket being used to store your VPC Flow Logs. An example on how to configure that can be found here - https://repost.aws/knowledge-center/lambda-execution-role-s3-bucket
