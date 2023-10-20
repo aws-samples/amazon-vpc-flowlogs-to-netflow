@@ -52,7 +52,7 @@ If you change the format including the order of the fields then the code will ne
 
 1. This code was designed and tested against the NetFlow v5 format. It requires updating to work with the later formats.
 2. This code has little to no error handling, it's just proof of concept code. You will need to add in some error handling.
-3. The NetFlow flowsequence number is currently always set to 1. This works but isn't ideal. One method to fix this would be to send the S3 event notifications to a SQS FIFO queue. The SQS queue would empty at a rate of 1, calling the Lambda function. The Lambda function would be updated to store the current flowsequence such as [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) (Review DynamoDB [costs](https://aws.amazon.com/dynamodb/pricing/) especially if you have large amounts of network traffic to process) so that it can be updated correctly. (flowsequence is a 32-bit integer, which is 4,294,967,295 (2^32 - 1) in size so it'll need to be reset).
+3. The NetFlow flowsequence number is currently always set to 1. This works but isn't ideal. One method to fix this would be to send the S3 event notifications to a SQS FIFO queue. The SQS queue would empty at a rate of 1, calling the Lambda function. The Lambda function would be updated to store the current flowsequence somewhere such as [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) (Review DynamoDB [costs](https://aws.amazon.com/dynamodb/pricing/) especially if you have large amounts of network traffic to process) so that it can be updated correctly. (flowsequence is a 32-bit integer, which is 4,294,967,295 (2^32 - 1) in size so it'll need to be reset).
 
 ## Example Architecture
 
